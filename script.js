@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
       let imgSrc = img ? img.getAttribute("src") : "";
 
       if (imgSrc && imgSrc.startsWith("/")) {
-  imgSrc = ".." + imgSrc;
-} else if (imgSrc && !imgSrc.startsWith("http")) {
-  imgSrc = "../" + imgSrc; // adiciona ../ para caminhos relativos sem /
-}
+        imgSrc = ".." + imgSrc;
+      } else if (imgSrc && !imgSrc.startsWith("http")) {
+        imgSrc = "../" + imgSrc; // adiciona ../ para caminhos relativos sem /
+      }
 
       try {
         localStorage.setItem("selectedProfileName", nome);
