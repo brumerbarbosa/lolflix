@@ -1,0 +1,309 @@
+:root {
+  --bg: #141414;
+  --text: #e6e6e6;
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --text-hover: rgb(192, 192, 192);
+  --border: rgba(255, 255, 255, 0.4);
+  --border-hover: rgba(255, 255, 255, 0.8);
+}
+
+/* Variáveis do tema claro */
+:root.light {
+  --bg: #f5f5f5;
+  --text: #141414;
+  --text-muted: rgba(0, 0, 0, 0.4);
+  --text-hover: rgb(60, 60, 60);
+  --border: rgba(0, 0, 0, 0.4);
+  --border-hover: rgba(0, 0, 0, 0.8);
+}
+
+:root.light .AddPerfil .img-wrapper img {
+  mix-blend-mode: darken; /* no light mode usa darken ao invés de lighten */
+}
+
+* {
+  box-sizing: border-box;
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4.5rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 3.5rem;
+  margin: 0;
+}
+
+.gerenciar {
+  display: inline-block;
+  font-family: Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 0.8rem 2.5rem;
+  letter-spacing: 0.1em;
+  margin-top: 5rem;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.gerenciar:hover {
+  color: var(--text-hover);
+  border-color: var(--border-hover);
+}
+
+.logo {
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profiles {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  cursor: pointer;
+}
+
+.AddPerfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  cursor: pointer;
+}
+
+.AddPerfil .img-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.AddPerfil .img-wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.AddPerfil .img-wrapper img {
+  mix-blend-mode: lighten; /* remove fundos escuros */
+  width: 50%;
+  height: 50%;
+  object-fit: contain; /* SVG não distorce */
+}
+
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+figcaption {
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: Helvetica, sans-serif;
+  font-size: 1.5em;
+  margin-top: 0.2em;
+  transition: color 0.2s ease;
+}
+
+.img-wrapper {
+  width: 200px;
+  height: 200px;
+  border-radius: 5%;
+  overflow: hidden;
+  position: relative; /* necessário para o ::after funcionar */
+  transition: box-shadow 0.2s ease;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.img-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* ocupa todo o espaço do wrapper */
+  border-radius: 5%;
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0);
+  transition: box-shadow 0.2s ease;
+}
+
+.img-wrapper:hover::after {
+  box-shadow: inset 0 0 0 4px rgb(212, 212, 212);
+}
+
+.profile:hover figcaption {
+  color: var(--text-hover);
+}
+
+.AddPerfil:hover figcaption {
+  color: var(--text-hover);
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.preloader.ativo {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.preloader-circle {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top-color: #e50914;
+  animation: girar 1s linear infinite;
+  background-color: transparent; /* corrige o * sobrescrevendo */
+}
+
+.preloader-foto {
+  width: 180px;
+  height: 180px;
+  border-radius: 5%;
+  object-fit: cover;
+  position: relative; /* garante que fica acima do círculo */
+  z-index: 1;
+  background-color: transparent; /* corrige o * sobrescrevendo */
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Media query para mobile */
+@media (max-width: 1150px) {
+  h1 {
+    font-size: 2.4rem;
+    text-align: center;
+  }
+
+  .img-wrapper {
+    width: 150px;
+    height: 150px;
+  }
+
+  figcaption {
+    font-size: 1rem;
+  }
+
+  .profile,
+  .AddPerfil {
+    gap: 20px; /* reduz o gap entre imagem e nome */
+  }
+
+  .profiles {
+    gap: 20px;
+  }
+
+  .logo {
+    display: flex;
+    width: 8rem;
+    top: 50px;
+  }
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-hover);
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .img-wrapper {
+    width: 130px;
+    height: 130px;
+  }
+
+  figcaption {
+    font-size: 1rem;
+  }
+
+  .profile,
+  .AddPerfil {
+    gap: 12px; /* reduz o gap entre imagem e nome */
+  }
+
+  .profiles {
+    gap: 16px;
+  }
+  .logo {
+    width: 8rem;
+    top: 50px;
+  }
+}
